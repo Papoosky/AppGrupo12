@@ -1,0 +1,32 @@
+
+#ifndef APP1_HEADER_H
+#define APP1_HEADER_H
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+
+typedef struct Estantes {
+    char estante_numero[5];
+    char estante_seccion[50];
+} Estantes;
+
+typedef struct Lugar{
+    int piso[5];
+    char edificio[10];
+    char sede[20];
+}Lugar;
+
+
+typedef struct Book{
+    char titulo[100];
+    char autor[50];
+    int anio[5];
+    Estantes info_Estantes;
+    Lugar info_Lugar:
+}  Book;
+
+
+
+
+
+#endif //APP1_HEADER_H
