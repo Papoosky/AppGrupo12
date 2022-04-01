@@ -12,7 +12,10 @@ void printValues(Libro libro[]);
 
 FILE * openingFile(char *filename){
     FILE *fp;
+    FILE *fp1;
     fp = fopen(filename,"r");
+    fp1 = fopen(filename,"r");
+
     return fp;
 }
 
@@ -21,14 +24,15 @@ FILE * openingFile(char *filename){
 int main(int argc, char *argv[] ){
 
     FILE *fp = openingFile(argv[1]);
+    FILE *fp1 = openingFile(argv[1]);
 
 //DEBUG CODE
-    // showContents(fp);
+    //showContents(fp);
     Libro *libros;
     libros = getLibros(fp);
-    // showContentsAsStruct(fp);
+    showContentsAsStruct(fp1);
     //
-    menu(libros, registryCount);
+    //menu(libros, registryCount);
     printValues(libros);
     return 0;
 
@@ -67,7 +71,7 @@ void printValues(Libro libro[]){
     printf("\n");
     //printf("%d\n",tope );
 
-    for(int i=0; i<registryCount+1; i++)
+    for(int i=0; i<registryCount; i++)
     {
         /* code */
         printf("titulo: %s, autor: %s, anio: %s, estante_numero: %s, estante_seccion: %s, piso: %s, edificio: %s, sede: %s\n",libro[i].titulo,libro[i].autor, libro[i].anio, libro[i].estante_numero,libro[i].estante_seccion, libro[i].piso, libro[i].edificio, libro[i].sede);
