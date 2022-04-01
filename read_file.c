@@ -22,9 +22,7 @@ Libro* getLibros(FILE *fp) {
         token = strtok(row, ",");
         Libro *libro = (Libro *) malloc(sizeof(Libro));
 
-        //obtengo el siguiente campo
-      //  token = strtok(NULL, ",");
-        //inicializo el string en la estructura acorde al tamaño que venga del archivo
+        //inicializo el string en la estructura acorde al tamaÃ±o que venga del archivo
         libro->titulo = (char*)malloc( strlen(token) * sizeof(char));
         //finalmente lo copio en el campo de persona
         strcpy(libro->titulo, token);
@@ -35,31 +33,29 @@ Libro* getLibros(FILE *fp) {
         strcpy(libro->autor, token);
 
         token = strtok(NULL, ",");
-
-        int anio = atoi(token);
-        libro->anio = anio;
+        libro->anio = (char*) malloc(strlen(token) * sizeof(char));
+        strcpy(libro->anio, token);
 
         token = strtok(NULL, ",");
         libro->estante_numero = (char*)malloc( strlen(token) * sizeof(char));
         strcpy(libro->estante_numero, token);
-        
+
         token = strtok(NULL, ",");
         libro->estante_seccion = (char*)malloc( strlen(token) * sizeof(char));
         strcpy(libro->estante_seccion, token);
-        
-        token = strtok(NULL, ",");
 
-        int piso = atoi(token);
-        libro->piso = piso;
-        
+        token = strtok(NULL, ",");
+        libro->piso = (char*)malloc( strlen(token) * sizeof(char));
+        strcpy(libro->piso, token);
+
         token = strtok(NULL, ",");
         libro->edificio = (char*)malloc( strlen(token) * sizeof(char));
         strcpy(libro->edificio, token);
-        
+
         token = strtok(NULL, ",");
         libro->sede = (char*)malloc( strlen(token) * sizeof(char));
         strcpy(libro->sede, token);
-        
+
         libros[cont] = *libro;
         cont++;
     }
