@@ -8,7 +8,7 @@
 
 void showContents(FILE *myFile);
 void showContentsAsStruct(FILE *pFile);
-void printValues(Libro libro[]);
+void printValues(Libro nuevos_libros[]);
 
 FILE * openingFile(char *filename){
     FILE *fp;
@@ -29,10 +29,10 @@ int main(int argc, char *argv[] ){
 //DEBUG CODE
     //showContents(fp);
     Libro *libros;
+
     libros = getLibros(fp);
-    showContentsAsStruct(fp1);
-    //
-    //menu(libros, registryCount);
+    //showContentsAsStruct(fp1);
+    menu(libros, registryCount);
     printValues(libros);
     return 0;
 

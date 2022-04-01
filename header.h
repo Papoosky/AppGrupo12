@@ -12,9 +12,8 @@ struct Libros{
 
 };
 typedef struct Libros Libro;
-
 extern int registryCount;
 
 Libro * getLibros(FILE *fp);
 void menu(Libro libros[], int registryCount);
-void agregarLibro(Libro *libros);
+void agregarLibro(Libro libros[]);
