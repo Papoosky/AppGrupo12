@@ -5,14 +5,15 @@ void menu(Libro libros[], int registryCount, char *archivo_csv) {
         int opcion, subopcion, salir = 0;
         if (trig == 1) {
             registryCount = 0;
-            FILE *notas = fopen(archivo_csv, "r");
+            FILE *fp = fopen(archivo_csv, "r");
+            libros = getLibros(fp);
         }
 
 
 
 
 
-            printf("\nBienvenido a la biblioteca\n");
+        printf("\nBienvenido a la biblioteca\n");
         printf("Selecciona una opcion: \n");
         printf("1. Aniadir/Quitar un libro.\n");
         printf("Opcion: ");
