@@ -15,5 +15,6 @@ typedef struct Libros Libro;
 extern int registryCount;
 
 Libro * getLibros(FILE *fp);
-void menu(Libro libros[], int registryCount);
-void agregarLibro(Libro libros[]);
+void menu(Libro libros[], int registryCount, char *archivo_csv);
+void agregarLibro(char *archivo_csv);
+void opciones(int *cerrar, int *salir);

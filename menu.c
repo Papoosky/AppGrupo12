@@ -1,11 +1,18 @@
 #include "header.h"
 void menu(Libro libros[], int registryCount, char *archivo_csv) {
-    int cerrar = 0;
+    int cerrar = 0, trig = 0;
     while (cerrar == 0) {
-        int opcion;
-        int subopcion;
-        int salir = 0;
-        printf("\nBienvenido a la biblioteca\n");
+        int opcion, subopcion, salir = 0;
+        if (trig == 1) {
+            registryCount = 0;
+            FILE *notas = fopen(archivo_csv, "r");
+        }
+
+
+
+
+
+            printf("\nBienvenido a la biblioteca\n");
         printf("Selecciona una opcion: \n");
         printf("1. Aniadir/Quitar un libro.\n");
         printf("Opcion: ");
@@ -23,6 +30,7 @@ void menu(Libro libros[], int registryCount, char *archivo_csv) {
                     switch (subopcion) {
                         case 1: {
                             agregarLibro(archivo_csv);
+                            opciones(&cerrar, &salir);
                         }break;
                         case 3: {
                             salir = 1;
