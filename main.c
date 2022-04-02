@@ -22,7 +22,8 @@ FILE * openingFile(char *filename){
 
 
 int main(int argc, char *argv[] ){
-
+    char* archivo_csv;
+    archivo_csv = argv[1];
     FILE *fp = openingFile(argv[1]);
     FILE *fp1 = openingFile(argv[1]);
 
@@ -32,7 +33,7 @@ int main(int argc, char *argv[] ){
 
     libros = getLibros(fp);
     //showContentsAsStruct(fp1);
-    menu(libros, registryCount);
+    menu(libros, registryCount, archivo_csv);
     printValues(libros);
     return 0;
 

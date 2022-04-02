@@ -1,5 +1,5 @@
 #include "header.h"
-void menu(Libro libros[], int registryCount) {
+void menu(Libro libros[], int registryCount, char *archivo_csv) {
     int cerrar = 0;
     while (cerrar == 0) {
         int opcion;
@@ -22,7 +22,7 @@ void menu(Libro libros[], int registryCount) {
                     printf("\n");
                     switch (subopcion) {
                         case 1: {
-                            agregarLibro(libros);
+                            agregarLibro(archivo_csv);
                         }break;
                         case 3: {
                             salir = 1;
