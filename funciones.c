@@ -1,5 +1,7 @@
 #include "header.h"
 #include<string.h>
+#include<stdlib.h>
+#include<ctype.h>
 void opciones(int *cerrar, int *salir) {
     int subopcion;
     printf("\n[1]   Volver al menu principal.\n");
@@ -167,7 +169,7 @@ void EditarPiso(Libro *libros, int registryCount) {
         printf("Nuevo piso: %s\n", libros[a].piso);
     }
 }
-void Guardar(Libro Datos[], int registryCount, char *archivo_csv) {
+void Guardar(Libro Datos[], int j, char *archivo_csv) {
     int x;
     FILE *fp2 = fopen(archivo_csv, "w+");
 
@@ -175,25 +177,92 @@ void Guardar(Libro Datos[], int registryCount, char *archivo_csv) {
             "titulo,autor,anio,estante_numero,estante_seccion,piso,edificio,"
             "sede\n");
 
-    for (x = 0; x < registryCount; ++x) {
+    for (x = 0; x < j; ++x) {
         if (strcmp(Datos[x].titulo, "del") == 0) {
             continue;
         }
-        if (x < registryCount - 1) {
-            fprintf(fp2, "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
-                    "\"", Datos[x].titulo, "\"", ",", "\"", Datos[x].autor, "\"", ",",
+        if (x < j - 1) {
+            fprintf(fp2, "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
+                    Datos[x].titulo, ",", Datos[x].autor, ",",Datos[x].anio, ",", Datos[x].estante_numero, ",",Datos[x].estante_seccion ,",",Datos[x].piso, ",",Datos[x].edificio,",", Datos[x].sede);
+        }
+        else {
+            fprintf(fp2, "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
+                    Datos[x].titulo, ",", Datos[x].autor, ",",
                     Datos[x].anio, ",", Datos[x].estante_numero, ",",
-                    "\"", Datos[x].estante_seccion, "\"", ",",
-                    Datos[x].piso, ",", "\"", Datos[x].edificio,
-                    "\"", ",", "\"", Datos[x].sede, "\"\n");
-        } else {
-            fprintf(fp2, "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
-                    "\"", Datos[x].titulo, "\"", ",", "\"", Datos[x].autor, "\"", ",",
-                    Datos[x].anio, ",", Datos[x].estante_numero, ",",
-                    "\"", Datos[x].estante_seccion, "\"", ",",
-                    Datos[x].piso, ",", "\"", Datos[x].edificio,
-                    "\"", ",", "\"", Datos[x].sede, "\"");
+                    Datos[x].estante_seccion, ",",Datos[x].piso, ",",
+                    Datos[x].edificio,",", Datos[x].sede);
         }
     }
     fclose(fp2);
 }
+void QuitarLibro(Libro Datos[], int j) {
+    char tituloAQuitar[200];
+    int found = 0;
+    int ind;
+    int y;
+
+
+    printf("Ingresa el nombre del libro a eliminar:\n");
+    fflush(stdout);
+    scanf(" %[^\n]", tituloAQuitar);
+
+    for (y = 0; y < j; ++y) {
+        if (strcmp(tituloAQuitar, Datos[y].titulo) == 0) {
+            found = 1;
+            ind = y;
+        }
+    }
+
+    if (found == 1) {
+        printf("Libro encontrado.\n");
+        strcpy(Datos[ind].titulo, "del");
+        strcpy(Datos[ind].autor, " ");
+        strcpy(Datos[ind].anio, " ");
+        strcpy(Datos[ind].estante_numero, " ");
+        strcpy(Datos[ind].estante_seccion, " ");
+        strcpy(Datos[ind].piso, " ");
+        strcpy(Datos[ind].edificio, " ");
+        strcpy(Datos[ind].sede, " ");
+        printf("...\n");
+        printf("Libro eliminado.\n");
+    } else {
+        printf("No se encuentra el libro.\n");
+    }
+}
+void buscarLibro(Libro *libros) {
+    char name[50];
+    printf("Ingrese el nombre del libro que desea buscar \n");
+    scanf("%s", &name);
+    //Hago una busqueda linea
+    int i = 0;
+    int encontre = 0;
+    while (i<registryCount && encontre == 0){
+        char *nameConverted = toLowerCase(libros[i].titulo);
+        char *nameToLook = toLowerCase(name);
+        char *ret = strstr(nameConverted, nameToLook);
+        if(ret){
+            encontre = 1;
+        } else {
+            i++;
+        }
+    }
+    //verifico que sali por que encontre
+    if (encontre == 1){
+        printf("La persona Existe, estos son los datos \n");
+        printf("%s,%s,%s,%s,%s,%s,%s,%s. \n", libros[i].titulo,
+               libros[i].autor, libros[i].anio,libros[i].estante_numero,libros[i].estante_seccion,libros[i].piso,
+               libros[i].edificio,libros[i].sede);
+    } else {
+        printf("La persona no existe!");
+    }
+
+}
+char *toLowerCase(char *name) {
+    char *converted =  (char*)malloc( strlen(name) * sizeof(char));
+    strcpy(converted,name);
+    for(int i = 0; converted[i]; i++){
+        converted[i] = tolower(converted[i]);
+    }
+    return converted;
+}
+
