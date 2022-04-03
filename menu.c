@@ -68,29 +68,29 @@ void menu(Libro libros[], int j, char *archivo_csv) {
                     switch (subopcion) {
                         case 1: {
 
-                            EditarLibro(libros, registryCount);
-                            Guardar(libros, registryCount, archivo_csv);
+                            EditarLibro(libros, j);
+                            Guardar(libros, j, archivo_csv);
                             opciones(&cerrar, &salir);
                         } break;
 
                         case 2: {
 
-                            EditarSede(libros, registryCount);
-                            Guardar(libros, registryCount, archivo_csv);
+                            EditarSede(libros, j);
+                            Guardar(libros, j, archivo_csv);
                             opciones(&cerrar, &salir);
                         } break;
 
                         case 3: {
 
-                            EditarPiso(libros, registryCount);
-                            Guardar(libros, registryCount, archivo_csv);
+                            EditarPiso(libros, j);
+                            Guardar(libros, j, archivo_csv);
                             opciones(&cerrar, &salir);
                         } break;
 
                         case 4: {
 
-                            EditarSeccion(libros, registryCount);
-                            Guardar(libros, registryCount, archivo_csv);
+                            EditarSeccion(libros, j);
+                            Guardar(libros, j, archivo_csv);
                             opciones(&cerrar, &salir);
                         } break;
 
@@ -103,7 +103,7 @@ void menu(Libro libros[], int j, char *archivo_csv) {
                 }break;
                 case 3: {
 
-                    Guardar(libros, registryCount, archivo_csv);
+                    Guardar(libros, j, archivo_csv);
                     buscarLibro(libros);
                     opciones(&cerrar, &salir);
                 } break;

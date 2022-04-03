@@ -42,23 +42,27 @@ void agregarLibro( char *archivo_csv) {
 
     printf("\n Libro guardado exitosamente!\n\n");
 }
-void EditarLibro(Libro *libros, int registryCount) {
-    char book[200];
+void EditarLibro(Libro *libros, int j) {
+    char name[50];
     char edit[200];
-    int opcion3, found = 0, b = 1, a;
+    int opcion3;
+    printf("Ingrese el titulo del libro que desea editar \n");
+    scanf("%s", &name);
 
-    printf("Ingresa el nombre del libro que deseas editar: \n");
-    fflush(stdout);
-    scanf(" %[^\n]", book);
-
-    for (int i = 0; i <= registryCount; i++) {
-        if (strcmp(book, libros[i].titulo) == 0) {
-            a = i;
-            found = 1;
+    int i = 0;
+    int encontre = 0;
+    while (i<registryCount && encontre == 0){
+        char *nameConverted = toLowerCase(libros[i].titulo);
+        char *nameToLook = toLowerCase(name);
+        char *ret = strstr(nameConverted, nameToLook);
+        if(ret){
+            encontre = 1;
+        } else {
+            i++;
         }
     }
 
-    if (found == 1) {
+    if (encontre == 1) {
         printf("Que informacion desea editar. \n");
         printf("1.     Autor. \n");
         printf("2.     Titulo. \n");
@@ -72,25 +76,25 @@ void EditarLibro(Libro *libros, int registryCount) {
                 fflush(stdout);
                 scanf(" %[^\n]", edit);
 
-                printf("\nAutor Antiguo: %s\n", libros[a].autor);
-                strcpy(libros[a].autor, edit);
-                printf("Autor Nuevo: %s\n\n", libros[a].autor);
+                printf("\nAutor Antiguo: %s\n", libros[i].autor);
+                strcpy(libros[i].autor, edit);
+                printf("Autor Nuevo: %s\n\n", libros[i].autor);
             } break;
             case 2: {
                 printf("Ingrese titulo.\n");
                 fflush(stdout);
                 scanf(" %[^\n]", edit);
-                printf("Old: %s\n", libros[a].titulo);
-                strcpy(libros[a].titulo, edit);
-                printf("New: %s\n", libros[a].titulo);
+                printf("Old: %s\n", libros[i].titulo);
+                strcpy(libros[i].titulo, edit);
+                printf("New: %s\n", libros[i].titulo);
             } break;
             case 3: {
                 printf("Ingrese anio.\n");
                 fflush(stdout);
                 scanf(" %[^\n]", edit);
-                printf("Old: %s\n", libros[a].anio);
-                strcpy(libros[a].anio, edit);
-                printf("New: %s\n", libros[a].anio);
+                printf("Old: %s\n", libros[i].anio);
+                strcpy(libros[i].anio, edit);
+                printf("New: %s\n", libros[i].anio);
             } break;
             default: {
                 printf("Opcion invalida.\n");
@@ -198,14 +202,11 @@ void Guardar(Libro Datos[], int j, char *archivo_csv) {
             "titulo,autor,anio,estante_numero,estante_seccion,piso,edificio,"
             "sede\n");
 
-    for (x = 0; x < j; ++x) {
+    for (x = 0; x < j; x++) {
         if (strcmp(Datos[x].titulo, "del") == 0){
             continue;
         }
-        if (x < j - 1) {
-            fprintf(fp2, "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
-                    Datos[x].titulo, ",", Datos[x].autor, ",",Datos[x].anio, ",", Datos[x].estante_numero, ",",Datos[x].estante_seccion ,",",Datos[x].piso, ",",Datos[x].edificio,",", Datos[x].sede);
-        }
+
         else {
             fprintf(fp2, "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
                     Datos[x].titulo, ",", Datos[x].autor, ",",
@@ -269,8 +270,8 @@ void buscarLibro(Libro *libros) {
     }
     //verifico que sali por que encontre
     if (encontre == 1){
-        printf("La persona Existe, estos son los datos \n");
-        printf("%s,%s,%s,%s,%s,%s,%s,%s. \n", libros[i].titulo,
+        printf("El libro existe, estos son los datos \n");
+        printf("%s,%s,%s,%s,%s,%s,%s,%s \n", libros[i].titulo,
                libros[i].autor, libros[i].anio,libros[i].estante_numero,libros[i].estante_seccion,libros[i].piso,
                libros[i].edificio,libros[i].sede);
     } else {
