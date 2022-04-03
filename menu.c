@@ -42,6 +42,8 @@ void menu(Libro libros[], int j, char *archivo_csv) {
                         case 2: {
                             QuitarLibro(libros, registryCount, archivo_csv);
                             opciones(&cerrar, &salir);
+
+
                         } break;
                         case 3: {
                             salir = 1;
@@ -73,6 +75,7 @@ void menu(Libro libros[], int j, char *archivo_csv) {
                         case 2: {
 
                             EditarSede(libros, registryCount);
+                            Guardar(libros, registryCount, archivo_csv);
                             opciones(&cerrar, &salir);
                         } break;
 

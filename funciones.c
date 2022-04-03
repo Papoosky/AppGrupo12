@@ -224,24 +224,34 @@ void Guardar(Libro Datos[], int j, char *archivo_csv) {
 }
 
 void QuitarLibro(Libro Datos[], int j, char *archivo_csv) {
-    char tituloAQuitar[200];
+    char tituloAQuitar[20];
     int x;
+    int found = 0;
+    int ind;
+
+
 
     printf("Ingresa el nombre del libro a eliminar:\n");
     fflush(stdout);
     scanf(" %[^\n]", tituloAQuitar);
 
     for (int x = 0; x < j; ++x) {
-        if (strcmp(tituloAQuitar,Datos[x].titulo) == 0) {
+        if (strcmp(tituloAQuitar,Datos[x].titulo) == 0)
+        {
             Datos[x].to_delete = +1;
+            ind=x;
+            found = 1;
         }
     }
-
+    if (found == 1) {
+        printf("Libro encontrado.\n");
+        printf("Libro eliminado.\n");
+    } else {
+        printf("No se encuentra el libro.\n");
+    }
     FILE *fp;
     fp= fopen(archivo_csv, "w+");
-
-    fprintf(fp,
-            "titulo,autor,anio,estante_numero,estante_seccion,piso,edificio,sede\n");
+    fprintf(fp,"titulo,autor,anio,estante_numero,estante_seccion,piso,edificio,sede\n");
     for (int x = 0; x < j; ++x) {
         if (Datos[x].to_delete != 1) {
             fprintf(fp, "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
@@ -250,11 +260,10 @@ void QuitarLibro(Libro Datos[], int j, char *archivo_csv) {
                     Datos[x].estante_seccion, ",", Datos[x].piso, ",",
                     Datos[x].edificio, ",", Datos[x].sede);
         }
-
     }
     fclose(fp);
-
 }
+
 
 void buscarLibro(Libro *libros) {
     char name[50];
