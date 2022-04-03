@@ -167,7 +167,7 @@ void EditarPiso(Libro *libros, int registryCount) {
         printf("Nuevo piso: %s\n", libros[a].piso);
     }
 }
-void Guardar(Libro Datos[], int registryCount, char *archivo_csv) {
+void Guardar(Libro Datos[], int j, char *archivo_csv) {
     int x;
     FILE *fp2 = fopen(archivo_csv, "w+");
 
@@ -175,25 +175,55 @@ void Guardar(Libro Datos[], int registryCount, char *archivo_csv) {
             "titulo,autor,anio,estante_numero,estante_seccion,piso,edificio,"
             "sede\n");
 
-    for (x = 0; x < registryCount; ++x) {
+    for (x = 0; x < j; ++x) {
         if (strcmp(Datos[x].titulo, "del") == 0) {
             continue;
         }
-        if (x < registryCount - 1) {
-            fprintf(fp2, "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
-                    "\"", Datos[x].titulo, "\"", ",", "\"", Datos[x].autor, "\"", ",",
+        if (x < j - 1) {
+            fprintf(fp2, "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
+                    Datos[x].titulo, ",", Datos[x].autor, ",",Datos[x].anio, ",", Datos[x].estante_numero, ",",Datos[x].estante_seccion ,",",Datos[x].piso, ",",Datos[x].edificio,",", Datos[x].sede);
+        }
+        else {
+            fprintf(fp2, "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
+                    Datos[x].titulo, ",", Datos[x].autor, ",",
                     Datos[x].anio, ",", Datos[x].estante_numero, ",",
-                    "\"", Datos[x].estante_seccion, "\"", ",",
-                    Datos[x].piso, ",", "\"", Datos[x].edificio,
-                    "\"", ",", "\"", Datos[x].sede, "\"\n");
-        } else {
-            fprintf(fp2, "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
-                    "\"", Datos[x].titulo, "\"", ",", "\"", Datos[x].autor, "\"", ",",
-                    Datos[x].anio, ",", Datos[x].estante_numero, ",",
-                    "\"", Datos[x].estante_seccion, "\"", ",",
-                    Datos[x].piso, ",", "\"", Datos[x].edificio,
-                    "\"", ",", "\"", Datos[x].sede, "\"");
+                    Datos[x].estante_seccion, ",",Datos[x].piso, ",",
+                    Datos[x].edificio,",", Datos[x].sede);
         }
     }
     fclose(fp2);
+}
+void QuitarLibro(Libro Datos[], int j) {
+    char tituloAQuitar[200];
+    int found = 0;
+    int ind;
+    int y;
+
+
+    printf("Ingresa el nombre del libro a eliminar:\n");
+    fflush(stdout);
+    scanf(" %[^\n]", tituloAQuitar);
+
+    for (y = 0; y < j; ++y) {
+        if (strcmp(tituloAQuitar, Datos[y].titulo) == 0) {
+            found = 1;
+            ind = y;
+        }
+    }
+
+    if (found == 1) {
+        printf("Libro encontrado.\n");
+        strcpy(Datos[ind].titulo, "del");
+        strcpy(Datos[ind].autor, " ");
+        strcpy(Datos[ind].anio, " ");
+        strcpy(Datos[ind].estante_numero, " ");
+        strcpy(Datos[ind].estante_seccion, " ");
+        strcpy(Datos[ind].piso, " ");
+        strcpy(Datos[ind].edificio, " ");
+        strcpy(Datos[ind].sede, " ");
+        printf("...\n");
+        printf("Libro eliminado.\n");
+    } else {
+        printf("No se encuentra el libro.\n");
+    }
 }
