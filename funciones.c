@@ -106,12 +106,12 @@ void EditarLibro(Libro *libros, int j) {
 }
 void EditarSeccion(Libro *libros, int j) {
     char name[50];
-    printf("Ingrese el nombre de la sección que desea editar \n");
+    printf("Ingrese el nombre del libro que desea editar \n");
     scanf("%s", &name);
     int i = 0;
     int encontre = 0;
     while (i<registryCount && encontre == 0){
-        char *nameConverted = toLowerCase(libros[i].estante_seccion);
+        char *nameConverted = toLowerCase(libros[i].titulo);
         char *nameToLook = toLowerCase(name);
         char *ret = strstr(nameConverted, nameToLook);
         if(ret){
@@ -136,12 +136,12 @@ void EditarSeccion(Libro *libros, int j) {
 
 void EditarSede(Libro *libros, int j) {
     char name[50];
-    printf("Ingrese el nombre de la sede que desea editar \n");
+    printf("Ingrese el nombre del libro que desea editar \n");
     scanf("%s", &name);
     int i = 0;
     int encontre = 0;
     while (i<registryCount && encontre == 0){
-        char *nameConverted = toLowerCase(libros[i].sede);
+        char *nameConverted = toLowerCase(libros[i].titulo);
         char *nameToLook = toLowerCase(name);
         char *ret = strstr(nameConverted, nameToLook);
         if(ret){
@@ -165,13 +165,13 @@ void EditarSede(Libro *libros, int j) {
 }
 void EditarPiso(Libro *libros, int j) {
     char name[50];
-    printf("Ingrese el nombre del piso que desea editar \n");
+     printf("Ingrese el nombre del libro que desea editar \n");
     scanf("%s", &name);
     //Hago una busqueda linea
     int i = 0;
     int encontre = 0;
     while (i<registryCount && encontre == 0){
-        char *nameConverted = toLowerCase(libros[i].piso);
+        char *nameConverted = toLowerCase(libros[i].titulo);
         char *nameToLook = toLowerCase(name);
         char *ret = strstr(nameConverted, nameToLook);
         if(ret){
