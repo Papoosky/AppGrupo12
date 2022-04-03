@@ -100,7 +100,7 @@ void EditarLibro(Libro *libros, int registryCount) {
         printf("No se encuentra el libro.\n");
     }
 }
-void EditarSeccion(Libro *libros, int registryCount) {
+void EditarSeccion(Libro *libros, int j) {
     char edit[200];
     char book[200];
     int found = 0, a;
@@ -108,7 +108,7 @@ void EditarSeccion(Libro *libros, int registryCount) {
     printf("Ingresa el nombre del libro que deseas editar: \n");
     fflush(stdout);
     scanf(" %[^\n]", book);
-    for (int i = 0; i <= registryCount; i++) {
+    for (int i = 0; i <= j; i++) {
         if (strcmp(book, libros[i].titulo) == 0) {
             a = i;
             found = 1;
@@ -123,7 +123,7 @@ void EditarSeccion(Libro *libros, int registryCount) {
         printf("Nueva seccion: %s\n", libros[a].estante_seccion);
     }
 }
-void EditarSede(Libro *libros, int registryCount) {
+void EditarSede(Libro *libros, int j) {
     char edit[200];
     char book[200];
     int found = 0, a, i;
@@ -131,7 +131,7 @@ void EditarSede(Libro *libros, int registryCount) {
     printf("Ingresa el nombre del libro que deseas editar: \n");
     fflush(stdout);
     scanf(" %[^\n]", book);
-    for (i = 0; i <= registryCount; i++) {
+    for (i = 0; i <= j; i++) {
         if (strcmp(book, libros[i].titulo) == 0) {
             a = i;
             found = 1;
@@ -146,28 +146,36 @@ void EditarSede(Libro *libros, int registryCount) {
         printf("Nueva sede: %s\n", libros[a].sede);
     }
 }
-void EditarPiso(Libro *libros, int registryCount) {
-    char edit[200];
-    char book[200];
-    int found = 0, a, i;
-
-    printf("Ingresa el nombre del libro que deseas editar: \n");
-    fflush(stdout);
-    scanf(" %[^\n]", book);
-    for (i = 0; i <= registryCount; i++) {
-        if (strcmp(book, libros[i].titulo) == 0) {
-            a = i;
-            found = 1;
+void EditarPiso(Libro *libros, int j) {
+    char name[50];
+    printf("Ingrese el nombre del piso que desea editar \n");
+    scanf("%s", &name);
+    //Hago una busqueda linea
+    int i = 0;
+    int encontre = 0;
+    while (i<registryCount && encontre == 0){
+        char *nameConverted = toLowerCase(libros[i].piso);
+        char *nameToLook = toLowerCase(name);
+        char *ret = strstr(nameConverted, nameToLook);
+        if(ret){
+            encontre = 1;
+        } else {
+            i++;
         }
     }
-    if (found == 1) {
-        printf("\nPiso actual: %s\n", libros[a].piso);
+    //verifico que sali por que encontre
+    if (encontre == 1) {
+        printf("\nPiso actual: %s\n", libros[i].piso);
         printf("Ingrese el piso:\n");
         fflush(stdout);
-        scanf(" %[^\n]", edit);
-        strcpy(libros[a].piso, edit);
-        printf("Nuevo piso: %s\n", libros[a].piso);
+        scanf(" %[^\n]", name);
+        strcpy(libros[i].piso, name);
+        printf("Nuevo piso: %s\n", libros[i].piso);
     }
+    else {
+        printf("El piso no existe!");
+    }
+
 }
 void Guardar(Libro Datos[], int j, char *archivo_csv) {
     int x;

@@ -110,5 +110,11 @@ void menu(Libro libros[], int j, char *archivo_csv) {
                 } break;
             }
         }while (salir == 0);
+        if (cerrar == 1) {
+
+            printf("Guardando...\n");
+            Guardar(libros, registryCount, archivo_csv);
+            printf("Saliendo del sistema...\n");
+        }
     }
 }
