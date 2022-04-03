@@ -29,8 +29,8 @@ void agregarLibro( char *archivo_csv) {
 
     printf("Ingresa la informacion del libro a agregar:\n");
     printf("El formato admitido es: "
-      "\"titulo\",\"autor\",anio,estante_numero,\"estante_seccion\",piso,"
-      "\"edificio\",\"sede\"\n");
+           "\"titulo\",\"autor\",anio,estante_numero,\"estante_seccion\",piso,"
+           "\"edificio\",\"sede\"\n");
     fflush(stdout);
     scanf(" %[^\n]", info_libro);
 
@@ -199,7 +199,7 @@ void Guardar(Libro Datos[], int j, char *archivo_csv) {
             "sede\n");
 
     for (x = 0; x < j; ++x) {
-        if (strcmp(Datos[x].titulo, "del") == 0) {
+        if (strcmp(Datos[x].titulo, "del") == 0){
             continue;
         }
         if (x < j - 1) {
@@ -237,13 +237,13 @@ void QuitarLibro(Libro Datos[], int j) {
     if (found == 1) {
         printf("Libro encontrado.\n");
         strcpy(Datos[ind].titulo, "del");
-        strcpy(Datos[ind].autor, " ");
+        /*strcpy(Datos[ind].autor, " ");
         strcpy(Datos[ind].anio, " ");
         strcpy(Datos[ind].estante_numero, " ");
         strcpy(Datos[ind].estante_seccion, " ");
         strcpy(Datos[ind].piso, " ");
         strcpy(Datos[ind].edificio, " ");
-        strcpy(Datos[ind].sede, " ");
+        strcpy(Datos[ind].sede, " ");*/
         printf("...\n");
         printf("Libro eliminado.\n");
     } else {
@@ -286,4 +286,3 @@ char *toLowerCase(char *name) {
     }
     return converted;
 }
-

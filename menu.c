@@ -34,15 +34,16 @@ void menu(Libro libros[], int j, char *archivo_csv) {
                     printf("\n");
                     switch (subopcion) {
                         case 1: {
-                            Guardar(libros, registryCount, archivo_csv);
                             agregarLibro(archivo_csv);
                             trig = 1;
+                            j++;
+                            Guardar(libros, j, archivo_csv);
                             opciones(&cerrar, &salir);
                         }break;
                         case 2: {
                             QuitarLibro(libros, j);
                             j--;
-                            Guardar(libros, registryCount, archivo_csv);
+                            Guardar(libros, j, archivo_csv);
                             opciones(&cerrar, &salir);
                         } break;
                         case 3: {
@@ -75,18 +76,21 @@ void menu(Libro libros[], int j, char *archivo_csv) {
                         case 2: {
 
                             EditarSede(libros, registryCount);
+                            Guardar(libros, registryCount, archivo_csv);
                             opciones(&cerrar, &salir);
                         } break;
 
                         case 3: {
 
                             EditarPiso(libros, registryCount);
+                            Guardar(libros, registryCount, archivo_csv);
                             opciones(&cerrar, &salir);
                         } break;
 
                         case 4: {
 
                             EditarSeccion(libros, registryCount);
+                            Guardar(libros, registryCount, archivo_csv);
                             opciones(&cerrar, &salir);
                         } break;
 
@@ -113,7 +117,7 @@ void menu(Libro libros[], int j, char *archivo_csv) {
         if (cerrar == 1) {
 
             printf("Guardando...\n");
-            Guardar(libros, registryCount, archivo_csv);
+            Guardar(libros, j, archivo_csv);
             printf("Saliendo del sistema...\n");
         }
     }
