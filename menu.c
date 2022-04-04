@@ -35,6 +35,8 @@ void menu(Libro libros[], int j, char *archivo_csv) {
                     switch (subopcion) {
                         case 1: {
                             agregarLibro(archivo_csv);
+                            FILE *notas = fopen(archivo_csv, "r");
+                            libros = getLibros(notas);
                             trig = 1;
                             j++;
                             Guardar(libros, j, archivo_csv);
